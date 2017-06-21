@@ -1,0 +1,9 @@
+{
+	"name": "openweatherd",
+	"authors": [
+		"Oskar Mendel"
+	],
+	"description": "A D library to work with weather information and forecast data provided by Open Weather Map.",
+	"copyright": "Copyright © 2017, Oskar",
+	"license": "MIT"
+}
