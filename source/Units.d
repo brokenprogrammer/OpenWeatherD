@@ -22,41 +22,10 @@
 	SOFTWARE.
 +/
 
-module openweatherd.openweatherd;
+module openweatherd.units;
 
-import openweatherd.options;
-import openweatherd.units;
-import openweatherd.languages;
-
-class OpenWeatherD {
-
-	/**
-	 * Sets key value for the API.
-	 *
-	 * Params:
-	 *		key =  A key value for the API.
-	 */
-	public void setKey(string key) {
-		Options.getInstance().setKey(key);
-	}
-
-	/**
-	 * Sets language value for the API.
-	 *
-	 * Params:
-	 * 		language = A language value for the API.
-	 */
-	public void setLanguage(Languages language) {
-		Options.getInstance().setLanguage(language);
-	}
-
-	/**
-	 * Sets unit value for the API.
-	 *
-	 * Params:
-	 * 		unit = A unit value for the API.
-	 */
-	public void setUnits(Units unit) {
-		Options.getInstance().setUnits(unit);
-	}
+enum Units {
+    DEFAULT  = 0, /* Kelvin */
+    IMPERIAL = 1, /* Fahrenheit */
+    METRIC   = 2  /* Celsius */
 }
