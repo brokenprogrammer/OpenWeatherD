@@ -52,5 +52,4 @@ struct WeatherEntry {
     int time;                   /** time of data calculation, unix, UTC */
     int sunrise;                /** sunrise time */
     int sunset;                 /** sunset time */
-
 }
