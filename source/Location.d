@@ -31,8 +31,8 @@ struct Location {
 
     int id;
     string name;
-    int latitude;
-    int longitude;
+    double latitude = 0;
+    double longitude = 0;
     string zip;
     string country;
 
@@ -55,7 +55,7 @@ struct Location {
         return location;
     }
 
-    static Location getByCoordinates(int latitude, int longitude) {
+    static Location getByCoordinates(double latitude, double longitude) {
         Location location;
 
         location.type = LocationType.COORDINATES;
@@ -76,6 +76,29 @@ struct Location {
     }
 
     bool equals(Location location) {
-        return false;
+        return location.type == this.type
+            && location.id == this.id
+            && location.name == this.name
+            && location.latitude == this.latitude
+            && location.longitude == this.longitude
+            && location.zip == this.zip
+            && location.country == this.country;
+    }
+
+    unittest {
+        assert(Location.getById(6_198_442).id == 6_198_442);
+
+        assert(Location.getByName("Cheboksary", "RU").name == "Cheboksary");
+        assert(Location.getByName("Cheboksary", "RU").country == "RU");
+
+        assert(Location.getByCoordinates(56.174999, 47.286388).latitude == 56.174999);
+        assert(Location.getByCoordinates(56.174999, 47.286388).longitude == 47.286388);
+
+        assert(Location.getByZip("428000", "RU").zip == "428000");
+        assert(Location.getByZip("428000", "RU").country == "RU");
+
+        Location location = Location.getById(6_198_442);
+        assert(Location.getById(6_198_442).equals(location) == true);
+        assert(Location.getByName("Cheboksary", "RU").equals(location) == false);
     }
 }
