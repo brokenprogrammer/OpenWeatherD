@@ -24,7 +24,6 @@
 
 module openweatherd.currentweather;
 
-import std.stdio;
 import std.conv;
 import openweatherd.languages;
 import openweatherd.location;
@@ -73,7 +72,6 @@ class CurrentWeather {
 		// Set API key value
 		url = url ~ "&appid=" ~ options.getKey();
 
-		// Parse stuff
 		auto content = get(url);
 		JSONValue response = parseJSON(content);
 
@@ -83,15 +81,28 @@ class CurrentWeather {
 		entry.description = response.object["weather"].array[0].object["description"].str;
 		entry.icon = response.object["weather"].array[0].object["icon"].str;
 
-		// If the units are metric it is retrieved as an integer.
-		if (options.getUnits() == Units.METRIC) {
-			entry.temperature = to!int(response.object["main"].object["temp"].integer);
-			entry.minimum = to!int(response.object["main"].object["temp_min"].integer);
-			entry.maximum = to!int(response.object["main"].object["temp_max"].integer);
-		} else {
-			entry.temperature = response.object["main"].object["temp"].floating;
-			entry.minimum = response.object["main"].object["temp_min"].floating;
-			entry.maximum = response.object["main"].object["temp_max"].floating;
+		if (const(JSONValue)* temp = "temp" in response.object["main"]) {
+			if (temp.type() == JSON_TYPE.INTEGER) {
+				entry.temperature = to!int(response.object["main"].object["temp"].integer);
+			} else if (temp.type() == JSON_TYPE.FLOAT) {
+				entry.temperature = response.object["main"].object["temp"].floating;
+			}
+		}
+
+		if (const(JSONValue)* tempmin = "temp_min" in response.object["main"]) {
+			if (tempmin.type() == JSON_TYPE.INTEGER) {
+				entry.minimum = to!int(response.object["main"].object["temp_min"].integer);
+			} else if (tempmin.type() == JSON_TYPE.FLOAT) {
+				entry.minimum = response.object["main"].object["temp_min"].floating;
+			}
+		}
+
+		if (const(JSONValue)* tempmax = "temp_max" in response.object["main"]) {
+			if (tempmax.type() == JSON_TYPE.INTEGER) {
+				entry.maximum = to!int(response.object["main"].object["temp_max"].integer);
+			} else if (tempmax.type() == JSON_TYPE.FLOAT) {
+				entry.maximum = response.object["main"].object["temp_max"].floating;
+			}
 		}
 		
 		entry.pressure = to!int(response.object["main"].object["pressure"].integer);
@@ -109,15 +120,23 @@ class CurrentWeather {
 			entry.grndLevel = to!int(response.object["main"].object["pressure"].integer);
 		}
 
-		if (const(JSONValue)* wind = "wind" in response) {
-			if (options.getUnits() == Units.IMPERIAL) {
-				entry.windSpeed = to!int(response.object["wind"].object["speed"].floating);
-			} else {
+		if (const(JSONValue)* windspeed = "speed" in response.object["wind"]) {
+			if (windspeed.type() == JSON_TYPE.INTEGER) {
 				entry.windSpeed = to!int(response.object["wind"].object["speed"].integer);
+			} else if (windspeed.type() == JSON_TYPE.FLOAT) {
+				entry.windSpeed = to!int(response.object["wind"].object["speed"].floating);
 			}
-			entry.windDirection = to!int(response.object["wind"].object["deg"].integer);
 		} else {
 			entry.windSpeed = 0;
+		}
+
+		if (const(JSONValue)* winddirection = "deg" in response.object["wind"]) {
+			if (winddirection.type() == JSON_TYPE.INTEGER) {
+				entry.windDirection = to!int(response.object["wind"].object["deg"].integer);
+			} else if (winddirection.type() == JSON_TYPE.FLOAT) {
+				entry.windDirection = to!int(response.object["wind"].object["deg"].floating);
+			}
+		} else {
 			entry.windDirection = 0;
 		}
 
