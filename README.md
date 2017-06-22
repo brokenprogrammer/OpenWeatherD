@@ -1,6 +1,6 @@
 # OpenWeatherD
 A D library to work with weather information and forecasts data provided by Open Weather Map. 
-This is a port from the previously built library [OpenWeatherJS](https://github.com/andreypudov/OpenWeatherJS/)
+This is a port from JS to D from the previously built library [OpenWeatherJS](https://github.com/andreypudov/OpenWeatherJS/).
 
 # Usage
 We start initialization of the library by setting the options. To set the options we call the Options class like this:
