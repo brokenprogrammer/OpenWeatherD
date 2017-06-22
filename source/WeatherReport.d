@@ -30,14 +30,37 @@ class WeatherReport {
 
     private WeatherEntry[] entries;
 
+	/**
+	 * Adds a new entry into the entries array of WeatherEntries.
+	 *
+	 * Params:
+	 *		entry = A WeatherEntry to add to the WeatherReport.
+	 */
     public void addEntry(WeatherEntry entry) {
         entries ~= entry;
     }
 
+	/**
+	 * Gets target entry from the entries array. This lets you work
+	 * with the target entry with selected id.
+	 *
+	 * Params:
+	 *		index = number that represents the index of target entry.
+	 *
+	 * Returns:
+	 * 		a WeatherEntry from the entries array at index from parameters and
+     * 		returns undefined if index is out of range.
+	 */
     public WeatherEntry getEntry(int index) {
         return entries[index];
     }
 
+	/**
+	 * Returns an array of WeatherEntry used as a weather report.
+	 *
+	 * Returns:
+	 * 		An array of WeatherEntries.
+	 */
     public WeatherEntry[] getReport() {
         return entries;
     }

@@ -82,7 +82,7 @@ class Forecast {
         auto content = get(url);
 		JSONValue response = parseJSON(content);
 
-        for (int i = 0; i < to!int(response.object["cnt"].integer); i++) {
+        for (int i; i < to!int(response.object["cnt"].integer); i++) {
             WeatherEntry entry;
 
             entry.condition = to!WeatherCondition(to!int(response.object["list"].array[i].object["weather"].array[0].object["id"].integer));

@@ -39,6 +39,14 @@ import std.json;
 
 class CurrentWeather {
 
+	/**
+	 * Returns a current weather report for a given location value..
+	 *
+	 * Params:
+	 *		location =  A location value.
+     * Return: 
+     *      A current WeatherEntry for a given location.
+	 */
     public static WeatherEntry getWeather(Location location) {
         Options options = Options.getInstance();
 		string url;

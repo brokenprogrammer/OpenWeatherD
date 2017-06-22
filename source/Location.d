@@ -36,6 +36,12 @@ struct Location {
     string zip;
     string country;
 
+    /**
+	 * Constructs a new location instance by given id.
+	 *
+	 * Params:
+	 *		id =  A location id value.
+	 */
     static Location getById(int id) {
         Location location;
 
@@ -45,6 +51,13 @@ struct Location {
         return location;
     }
 
+    /**
+	 * Constructs a new location instance by given name and country.
+	 *
+	 * Params:
+	 *		name =  A location name value.
+     *      country = A location country value.
+	 */
     static Location getByName(string name, string country) {
         Location location;
 
@@ -55,6 +68,13 @@ struct Location {
         return location;
     }
 
+    /**
+	 * Constructs a new location instance by given latitude and longitude.
+	 *
+	 * Params:
+	 *		latitude =  A location latitude value.
+     *      longitude = A location longitude value.
+	 */
     static Location getByCoordinates(double latitude, double longitude) {
         Location location;
 
@@ -65,6 +85,13 @@ struct Location {
         return location;
     }
 
+    /**
+	 * Constructs a new location instance by given zip and country.
+	 *
+	 * Params:
+	 *		zip =  A location zip value.
+     *      country = A location country value.
+	 */
     static Location getByZip(string zip, string country) {
         Location location;
 
@@ -75,6 +102,15 @@ struct Location {
         return location;
     }
 
+    /**
+	 * Indicates whether some other location is "equal to" this one.
+	 *
+	 * Params:
+	 *		location =  the reference object with which to compare.
+     *
+     * Returns:
+     *      true if this object is equal to the object in the argument; false otherwise.
+	 */
     bool equals(Location location) {
         return location.type == this.type
             && location.id == this.id
