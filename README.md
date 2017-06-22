@@ -5,8 +5,8 @@ This is a port from the previously built library [OpenWeatherJS](https://github.
 # Usage
 We start initialization of the library by setting the options. To set the options we call the Options class like this:
 ```D
-	//New Options object
-	Options options = Options.getInstance();
+    //New Options object
+    Options options = Options.getInstance();
     // Set the api key the library should use.
     options.setKey("1d334b0f0f23fccba1cee7d3f4934ea7");
     // Set which temperature units the library should use (Default is Kelvin).
